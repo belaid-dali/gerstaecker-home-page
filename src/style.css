@@ -1,0 +1,119 @@
+/* @import "tailwindcss";
+
+#bottom-header {
+  border-color: #999;
+}
+
+#showProdMenu:hover {
+  background-color: black;
+  color: white;
+}
+
+.menu-nav a,
+.subcat.level-1 a,
+.subcat.level-2 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-text {
+  margin-right: 45px;
+}
+
+.menu-arrow,
+.arrows {
+  margin-left: auto;
+}
+
+.subcat {
+  display: none;
+} */
+
+/* llll */
+
+/* .menu-nav {
+  height: 0;
+  opacity: 0;
+  transition: all 0.5s ease;
+  transform: translateY(-100%);
+}
+
+.active {
+  height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+} */
+
+/* *********************** */
+
+@import "tailwindcss";
+
+#bottom-header {
+  border-color: #999;
+}
+
+#showProdMenu:hover {
+  background-color: black;
+  color: white;
+}
+
+.menu-nav a,
+.subcat.level-1 a,
+.subcat.level-2 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-text {
+  margin-right: 45px;
+}
+
+.menu-arrow,
+.arrows {
+  margin-left: auto;
+}
+
+.subcat {
+  display: none; /* Ensures subcategories are hidden initially */
+}
+
+/* ✅ Smooth transition for menu-nav */
+.menu-nav {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+    visibility 0.3s;
+}
+
+.menu-nav.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu-nav.closing {
+  opacity: 0;
+  transform: translateY(-100%);
+  visibility: hidden;
+}
+
+/* ✅ Fix Level-1 & Level-2 animation */
+.subcat.level-1,
+.subcat.level-2 {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+    visibility 0.3s;
+}
+
+.subcat.level-1.active,
+.subcat.level-2.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  display: block;
+}

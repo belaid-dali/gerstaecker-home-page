@@ -1,0 +1,19 @@
+{
+  "name": "gerstaecker-homepage",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.1.0",
+    "vite-plugin-html": "^3.2.2"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.8",
+    "tailwindcss": "^4.0.8"
+  }
+}
