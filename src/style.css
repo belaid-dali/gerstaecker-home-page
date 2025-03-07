@@ -53,9 +53,14 @@
 	border-color: #999;
 }
 
-#showProdMenu:hover {
+#showProdMenu:hover,
+.submenuCat:hover {
 	background-color: black;
 	color: white;
+}
+
+.submenuCat {
+	padding: 10px;
 }
 
 .menu-nav a,

@@ -1,0 +1,135 @@
+<div class="py-2">
+	<div class="container px-4 mx-auto">
+		<div class="flex flex-wrap items-center justify-between">
+			<!-- Slogan (visible on medium and larger screens) -->
+			<div class="hidden text-sm text-gray-600 md:block">
+				Europas größter Versandhandel für Künstlerbedarf
+			</div>
+
+			<!-- Login/Register and Cart (visible on medium and larger screens) -->
+			<div class="items-center hidden space-x-4 md:flex">
+				<!-- Login/Register Buttons -->
+				<div class="flex space-x-4">
+					<a
+						href="https://www.gerstaecker.de/mein-konto/"
+						class="text-gray-700 hover:text-blue-600"
+					>
+						<i class="fa fa-user"></i> Anmelden
+					</a>
+					<a
+						href="https://www.gerstaecker.de/konto-eroeffnen/"
+						class="text-gray-700 hover:text-blue-600"
+					>
+						<i class="fa fa-user-plus"></i> Registrieren
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Header Main -->
+<div class="mb-3.5">
+	<div class="container px-4 mx-auto">
+		<!-- Mobile Header -->
+		<div class="flex items-center justify-between py-4 md:hidden">
+			<!-- Mobile Menu Button -->
+			<button class="text-gray-700 focus:outline-none">
+				<i class="fa fa-bars fa-2x"></i>
+			</button>
+
+			<!-- Logo -->
+			<a href="https://www.gerstaecker.de/" class="flex-shrink-0">
+				<img
+					src="https://www.gerstaecker.de/out/de_gerstaecker/img/gerstaecker-logo-24.svg"
+					alt="Gerstaecker Logo"
+					class="h-12"
+				/>
+			</a>
+
+			<!-- Mobile Icons (Login and Cart) -->
+			<div class="flex items-center space-x-4">
+				<a
+					href="https://www.gerstaecker.de/mein-konto/"
+					class="text-gray-700 hover:text-blue-600"
+				>
+					<i class="fa fa-user"></i>
+				</a>
+			</div>
+		</div>
+
+		<!-- Desktop Header -->
+		<div class="items-center justify-between hidden py-4 md:flex">
+			<!-- Logo -->
+			<div class="flex-shrink-0">
+				<a href="https://www.gerstaecker.de/">
+					<img
+						src="https://www.gerstaecker.de/out/de_gerstaecker/img/gerstaecker-logo-24.svg"
+						alt="Gerstaecker Logo"
+						class="h-12"
+					/>
+				</a>
+			</div>
+
+			<!-- Search Bar -->
+			<div class="flex-grow mx-20">
+				<form class="relative w-full max-w-md">
+					<input
+						type="text"
+						placeholder="Titel, Artikelnummer..."
+						class="w-full py-2 pl-4 pr-12 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400"
+					/>
+					<button
+						type="submit"
+						class="absolute inset-y-0 right-0 flex items-center justify-center w-10 h-10 text-gray-500 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400"
+					>
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
+			</div>
+
+			<!-- Blog Icon and Cart -->
+			<div class="flex items-center mr-5 space-x-6">
+				<!-- Blog Icon -->
+				<a
+					href="https://www.gerstaecker.de/blog"
+					class="text-gray-700 hover:text-blue-600"
+				>
+					<img
+						src="https://www.gerstaecker.de/out/master/img/header_blogicon.png"
+						alt="Blog"
+						class="h-8"
+					/>
+				</a>
+
+				<!-- Mini Basket Menu -->
+				<div class="relative flex">
+					<a
+						href="https://www.gerstaecker.de/warenkorb/"
+						class="text-gray-700 hover:text-blue-600"
+					>
+						<span class="hidden sm:inline-block">
+							<img
+								src="https://www.gerstaecker.de/out/master/img/header_warenkorbicon.png"
+								alt="Warenkorb"
+								class="h-8"
+							/>
+						</span>
+					</a>
+					<i
+						id="countValue"
+						class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 hidden"
+					>
+						0
+					</i>
+					<div class="relative hidden pl-3 -top-1 md:block">
+						<strong class="block text-sm font-semibold">Warenkorb</strong>
+						<span id="minibasket_totalprice" class="text-sm text-gray-600"
+							>0,00 €*</span
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

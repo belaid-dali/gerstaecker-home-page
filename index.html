@@ -1,14 +1,26 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="refresh" content="0; url=/homepage/index.html" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Vite App</title>
+		<script>
+			if (window.location.host.includes('localhost')) {
+				try {
+					const ws = new WebSocket('ws://localhost:5173/');
+					ws.onerror = () =>
+						console.warn('⚠️ Vite WebSocket failed. Ignoring...');
+				} catch (e) {
+					console.warn('⚠️ WebSocket connection error:', e);
+				}
+			}
+
+			// Redirect to the homepage
+			window.location.href = '/homepage/index.html';
+		</script>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
 </html>
