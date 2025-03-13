@@ -49,6 +49,31 @@
 
 @import 'tailwindcss';
 
+@theme {
+	--breakpoint-sm: 480px;
+	--breakpoint-tablet: 640px;
+	--breakpoint-lp: 980px;
+	--breakpoint-desktop: 1280px;
+}
+
+@media (min-width: var(--breakpoint-laptop)) {
+	.lp\:hidden {
+		display: none !important;
+	}
+
+	.lp\:block {
+		display: block !important;
+	}
+
+	.lp\:flex {
+		display: flex !important;
+	}
+}
+
+.basket-icon {
+	display: contents;
+}
+
 #bottom-header {
 	border-color: #999;
 }
@@ -60,7 +85,7 @@
 }
 
 .submenuCat {
-	padding: 10px;
+	padding: 10px 20px;
 }
 
 .menu-nav a,

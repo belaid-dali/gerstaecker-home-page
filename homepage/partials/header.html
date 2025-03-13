@@ -1,83 +1,57 @@
-<div class="py-2">
-	<div class="container px-4 mx-auto">
-		<div class="flex flex-wrap items-center justify-between">
-			<!-- Slogan (visible on medium and larger screens) -->
-			<div class="hidden text-sm text-gray-600 md:block">
+<header
+	class="w-full bg-white z-50 sticky top-0 transition-all duration-300"
+	id="main-header"
+>
+	<!-- Top header - shown only on desktop -->
+	<div class="hidden lp:block border-b border-gray-100">
+		<div
+			class="xl:container xl:mx-auto px-4 py-2 flex justify-between items-center"
+		>
+			<div class="text-sm text-gray-500">
 				Europas größter Versandhandel für Künstlerbedarf
 			</div>
-
-			<!-- Login/Register and Cart (visible on medium and larger screens) -->
-			<div class="items-center hidden space-x-4 md:flex">
-				<!-- Login/Register Buttons -->
-				<div class="flex space-x-4">
-					<a
-						href="https://www.gerstaecker.de/mein-konto/"
-						class="text-gray-700 hover:text-blue-600"
-					>
-						<i class="fa fa-user"></i> Anmelden
-					</a>
-					<a
-						href="https://www.gerstaecker.de/konto-eroeffnen/"
-						class="text-gray-700 hover:text-blue-600"
-					>
-						<i class="fa fa-user-plus"></i> Registrieren
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- Header Main -->
-<div class="mb-3.5">
-	<div class="container px-4 mx-auto">
-		<!-- Mobile Header -->
-		<div class="flex items-center justify-between py-4 md:hidden">
-			<!-- Mobile Menu Button -->
-			<button class="text-gray-700 focus:outline-none">
-				<i class="fa fa-bars fa-2x"></i>
-			</button>
-
-			<!-- Logo -->
-			<a href="https://www.gerstaecker.de/" class="flex-shrink-0">
-				<img
-					src="https://www.gerstaecker.de/out/de_gerstaecker/img/gerstaecker-logo-24.svg"
-					alt="Gerstaecker Logo"
-					class="h-12"
-				/>
-			</a>
-
-			<!-- Mobile Icons (Login and Cart) -->
-			<div class="flex items-center space-x-4">
+			<div class="flex space-x-4 items-center">
 				<a
-					href="https://www.gerstaecker.de/mein-konto/"
-					class="text-gray-700 hover:text-blue-600"
+					href="/mein-konto"
+					class="flex items-center text-sm text-gray-700 hover:text-gray-900 header-item-hover"
 				>
-					<i class="fa fa-user"></i>
+					<i data-lucide="user" class="h-4 w-4 mr-1"></i>
+					<span>Anmelden</span>
+				</a>
+				<a
+					href="/konto-eroeffnen"
+					class="flex items-center text-sm text-gray-700 hover:text-gray-900 header-item-hover"
+				>
+					<i data-lucide="user-plus" class="h-4 w-4 mr-1"></i>
+					<span>Registrieren</span>
 				</a>
 			</div>
 		</div>
+	</div>
 
-		<!-- Desktop Header -->
-		<div class="items-center justify-between hidden py-4 md:flex">
+	<!-- Main header -->
+	<div class="px-4 xl:container xl:mx-auto xl:px-4 max-w-none">
+		<!-- Desktop header view -->
+		<div class="hidden lp:flex justify-between items-center py-4">
 			<!-- Logo -->
-			<div class="flex-shrink-0">
-				<a href="https://www.gerstaecker.de/">
+			<div class="w-1/4">
+				<a href="/" class="block">
 					<img
 						src="https://www.gerstaecker.de/out/de_gerstaecker/img/gerstaecker-logo-24.svg"
-						alt="Gerstaecker Logo"
-						class="h-12"
+						alt="Logo"
+						class="h-10"
 					/>
 				</a>
 			</div>
 
-			<!-- Search Bar -->
-			<div class="flex-grow mx-20">
-				<form class="relative w-full max-w-md">
+			<!-- Search -->
+			<div class="w-1/2 px-4">
+				<div class="search-container relative">
 					<input
 						type="text"
 						placeholder="Titel, Artikelnummer..."
-						class="w-full py-2 pl-4 pr-12 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400"
+						class="search-input w-full border border-gray-300 rounded py-2 px-4 pr-10"
+						id="searchInput"
 					/>
 					<button
 						type="submit"
@@ -85,16 +59,13 @@
 					>
 						<i class="fa fa-search"></i>
 					</button>
-				</form>
+				</div>
 			</div>
 
-			<!-- Blog Icon and Cart -->
-			<div class="flex items-center mr-5 space-x-6">
-				<!-- Blog Icon -->
-				<a
-					href="https://www.gerstaecker.de/blog"
-					class="text-gray-700 hover:text-blue-600"
-				>
+			<!-- Blog, basket, menu -->
+			<div class="flex justify-end items-center space-x-6">
+				<!-- Blog icon -->
+				<a href="/blog" class="header-item-hover">
 					<img
 						src="https://www.gerstaecker.de/out/master/img/header_blogicon.png"
 						alt="Blog"
@@ -102,34 +73,162 @@
 					/>
 				</a>
 
-				<!-- Mini Basket Menu -->
-				<div class="relative flex">
-					<a
-						href="https://www.gerstaecker.de/warenkorb/"
-						class="text-gray-700 hover:text-blue-600"
-					>
-						<span class="hidden sm:inline-block">
+				<!-- Basket -->
+				<div class="relative">
+					<a href="/warenkorb" class="flex items-center header-item-hover">
+						<div class="basket-icon">
 							<img
 								src="https://www.gerstaecker.de/out/master/img/header_warenkorbicon.png"
 								alt="Warenkorb"
 								class="h-8"
 							/>
-						</span>
+							<span class="counter-badge hidden" id="desktopBasketCount"
+								>0</span
+							>
+						</div>
+						<div class="ml-2 text-left">
+							<div class="text-xs font-semibold">Warenkorb</div>
+							<div class="text-xs">0,00 €</div>
+						</div>
 					</a>
-					<i
-						id="countValue"
-						class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 hidden"
-					>
-						0
-					</i>
-					<div class="relative hidden pl-3 -top-1 md:block">
-						<strong class="block text-sm font-semibold">Warenkorb</strong>
-						<span id="minibasket_totalprice" class="text-sm text-gray-600"
-							>0,00 €*</span
-						>
-					</div>
 				</div>
+
+				<!-- Menu toggle -->
+				<button
+					id="desktopMenuBtn"
+					class="mobile-menu-button header-item-hover"
+				>
+					<div class="relative w-6 h-6">
+						<i
+							data-lucide="menu"
+							class="absolute inset-0 transition-all duration-300 menu-icon"
+						></i>
+						<i
+							data-lucide="x"
+							class="absolute inset-0 transition-all duration-300 opacity-0 rotate-90 scale-95 x-icon"
+						></i>
+					</div>
+				</button>
+			</div>
+		</div>
+
+		<!-- Mobile header view - showing at screens < 980px -->
+		<div class="lp:hidden flex justify-between items-center py-3">
+			<!-- Mobile Menu Button (Hamburger) -->
+			<div class="mobile-menu-btn">
+				<a class="mobile-menu flex" id="menu-btn" href="#menu-mobile">
+					<img
+						src="https://www.gerstaecker.de/out/master/img/icons/pp_burgermenu.svg"
+						class="pp-icons burger w-6 h-6"
+						alt="Menu"
+					/>
+					<img
+						src="https://www.gerstaecker.de/out/master/img/icons/pp_x.svg"
+						class="pp-icons closer w-6 h-6 hidden"
+						alt="Close"
+					/>
+				</a>
+			</div>
+
+			<!-- Logo -->
+			<a href="/" class="block">
+				<img
+					src="https://www.gerstaecker.de/out/de_gerstaecker/img/gerstaecker-logo-24.svg"
+					alt="Logo"
+					class="h-8"
+				/>
+			</a>
+
+			<!-- Account and Basket -->
+			<div class="flex items-center space-x-4">
+				<!-- Account icon -->
+				<a href="/mein-konto" class="header-item-hover">
+					<img
+						src="https://www.gerstaecker.de/out/master/img/icons/pp_account.svg"
+						alt="Konto"
+						class="h-5 w-5"
+					/>
+				</a>
+				<!-- Basket icon -->
+				<a href="/warenkorb" class="relative header-item-hover">
+					<img
+						src="https://www.gerstaecker.de/out/master/img/icons/pp_basket.svg"
+						alt="Warenkorb"
+						class="h-5 w-5"
+					/>
+					<span class="counter-badge hidden" id="mobileBasketCount">0</span>
+				</a>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<!-- Mobile search - shown below header on mobile -->
+	<div class="lp:hidden border-t border-gray-100 py-2 px-4">
+		<div class="search-container relative">
+			<input
+				type="text"
+				placeholder="Titel, Artikelnummer..."
+				class="search-input w-full border border-gray-300 rounded py-2 px-4 pr-10"
+				id="mobileSearchInput"
+			/>
+			<button
+				type="submit"
+				class="absolute inset-y-0 right-0 flex items-center justify-center w-10 h-10 text-gray-500 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400"
+			>
+				<i class="fa fa-search"></i>
+			</button>
+		</div>
+	</div>
+
+	<!-- Mobile Menu Overlay -->
+	<div
+		id="menuOverlay"
+		class="fixed inset-0 bg-black/20 z-40 transition-opacity duration-300 opacity-0 pointer-events-none"
+	></div>
+
+	<!-- Mobile Menu -->
+	<div
+		id="mobileMenu"
+		class="fixed top-0 left-0 bottom-0 w-full max-w-xs bg-white z-50 shadow-xl transition-transform duration-300 ease-in-out -translate-x-full"
+	>
+		<div class="p-4 border-b border-gray-100 flex justify-between items-center">
+			<div class="text-lg font-medium">Menu</div>
+			<button id="closeMenuBtn" class="header-item-hover">
+				<i data-lucide="x" class="h-6 w-6"></i>
+			</button>
+		</div>
+
+		<div class="overflow-y-auto h-[calc(100%-4rem)]">
+			<div class="flex flex-col">
+				<a
+					href="/mein-konto"
+					class="flex items-center px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+				>
+					<i data-lucide="user" class="h-5 w-5 mr-3 text-gray-800"></i>
+					<span class="text-gray-800">Anmelden</span>
+				</a>
+				<a
+					href="/konto-eroeffnen"
+					class="flex items-center px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+				>
+					<i data-lucide="user-plus" class="h-5 w-5 mr-3 text-gray-800"></i>
+					<span class="text-gray-800">Registrieren</span>
+				</a>
+				<a
+					href="/blog"
+					class="flex items-center px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+				>
+					<span class="text-gray-800">Blog</span>
+				</a>
+				<a
+					href="/warenkorb"
+					class="flex items-center px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+				>
+					<i data-lucide="shopping-cart" class="h-5 w-5 mr-3 text-gray-800"></i>
+					<span class="text-gray-800">Warenkorb</span>
+					<span class="ml-2 text-sm text-gray-500">0,00 €</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</header>
