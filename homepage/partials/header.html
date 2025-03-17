@@ -189,46 +189,182 @@
 	<!-- Mobile Menu -->
 	<div
 		id="mobileMenu"
-		class="fixed top-0 left-0 bottom-0 w-full max-w-xs bg-white z-50 shadow-xl transition-transform duration-300 ease-in-out -translate-x-full"
+		class="fixed top-0 left-0 bottom-0 w-full bg-white z-50 shadow-xl transition-transform duration-300 ease-in-out -translate-x-full"
 	>
+		<!-- Close Icon and Logo -->
 		<div class="p-4 border-b border-gray-100 flex justify-between items-center">
-			<div class="text-lg font-medium">Menu</div>
+			<!-- Logo -->
+			<a href="/" class="block">
+				<img
+					src="https://www.gerstaecker.de/out/de_gerstaecker/img/gerstaecker-logo-24.svg"
+					alt="Logo"
+					class="h-8"
+				/>
+			</a>
+			<!-- Close Icon -->
 			<button id="closeMenuBtn" class="header-item-hover">
-				<i data-lucide="x" class="h-6 w-6"></i>
+				<!-- Close Icon SVG -->
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-6 w-6 text-gray-700 hover:text-gray-900"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="2"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M6 18L18 6M6 6l12 12"
+					/>
+				</svg>
 			</button>
 		</div>
 
+		<!-- Full Menu Structure -->
 		<div class="overflow-y-auto h-[calc(100%-4rem)]">
-			<div class="flex flex-col">
-				<a
-					href="/mein-konto"
-					class="flex items-center px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
-				>
-					<i data-lucide="user" class="h-5 w-5 mr-3 text-gray-800"></i>
-					<span class="text-gray-800">Anmelden</span>
-				</a>
-				<a
-					href="/konto-eroeffnen"
-					class="flex items-center px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
-				>
-					<i data-lucide="user-plus" class="h-5 w-5 mr-3 text-gray-800"></i>
-					<span class="text-gray-800">Registrieren</span>
-				</a>
-				<a
-					href="/blog"
-					class="flex items-center px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
-				>
-					<span class="text-gray-800">Blog</span>
-				</a>
-				<a
-					href="/warenkorb"
-					class="flex items-center px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
-				>
-					<i data-lucide="shopping-cart" class="h-5 w-5 mr-3 text-gray-800"></i>
-					<span class="text-gray-800">Warenkorb</span>
-					<span class="ml-2 text-sm text-gray-500">0,00 €</span>
-				</a>
-			</div>
+			<ul id="mainMenu" class="flex flex-col">
+				<!-- Produkte with nested dropdown -->
+				<li class="hasSubCats">
+					<a
+						href="#produkte"
+						class="flex justify-between items-center px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+					>
+						<span>Produkte</span>
+						<span
+							class="menu-arrow text-gray-500 transform transition-transform duration-200"
+							>></span
+						>
+					</a>
+				</li>
+
+				<!-- Other menu items -->
+				<li>
+					<a
+						href="/Nur-Neuheiten-anzeigen"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Neuheiten</a
+					>
+				</li>
+				<li>
+					<a
+						href="/alles-fuer-die-aquarellmalerei/"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Aquarellmalerei</a
+					>
+				</li>
+				<li>
+					<a
+						href="/alles-fuer-die-acrylmalerei/"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Acrylmalerei</a
+					>
+				</li>
+				<li>
+					<a
+						href="/alles-fuer-die-oelmalerei/"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Ölmalerei</a
+					>
+				</li>
+				<li>
+					<a
+						href="/alles-fuer-die-pastellmalerei/"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Pastellmalerei</a
+					>
+				</li>
+				<li>
+					<a
+						href="/alles-fuer-das-zeichnen/"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Zeichnen</a
+					>
+				</li>
+				<li>
+					<a
+						href="/drucken/"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Drucken</a
+					>
+				</li>
+				<li>
+					<a
+						href="/marken"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Marken</a
+					>
+				</li>
+				<li>
+					<a
+						href="/sales"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>SALES</a
+					>
+				</li>
+				<li>
+					<a
+						href="/gutschein.html"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Gutschein</a
+					>
+				</li>
+				<li>
+					<a
+						href="/katalog-bestellen"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Katalog bestellen</a
+					>
+				</li>
+				<li>
+					<a
+						href="/warenkorb"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Direktbestellung</a
+					>
+				</li>
+				<li>
+					<a
+						href="/kuenstlerfachmaerkte"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Künstlerfachmärkte</a
+					>
+				</li>
+				<li>
+					<a
+						href="/index.php?cl=newsletter"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Newsletter</a
+					>
+				</li>
+				<li>
+					<a
+						href="/blog"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Blog</a
+					>
+				</li>
+				<li>
+					<a
+						href="/kontaktieren-sie-uns/"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Service Center</a
+					>
+				</li>
+				<li>
+					<a
+						href="/karriere-job/"
+						class="block px-4 py-3 border-b border-gray-100 hover:bg-gray-50"
+						>Karriere</a
+					>
+				</li>
+			</ul>
 		</div>
 	</div>
+
+	<!-- Mobile Menu Overlay -->
+	<div
+		id="menuOverlay"
+		class="fixed inset-0 bg-black/20 z-40 transition-opacity duration-300 opacity-0 pointer-events-none"
+	></div>
 </header>

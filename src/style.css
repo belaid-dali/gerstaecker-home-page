@@ -75,7 +75,13 @@
 }
 
 #bottom-header {
-	border-color: #999;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+
+#showProdMenu,
+.submenuCat {
+	font-size: 13px;
 }
 
 #showProdMenu:hover,
@@ -107,6 +113,10 @@
 
 .subcat {
 	display: none; /* Ensures subcategories are hidden initially */
+}
+
+.subcat-mob:not(.hidden) {
+	display: block; /* Show when the hidden class is removed */
 }
 
 /* ✅ Smooth transition for menu-nav */
@@ -154,6 +164,7 @@
 
 .submenuCats {
 	padding: 0 5px;
+	font-size: 13px;
 }
 
 .open-menu {
@@ -169,6 +180,10 @@
 		transform: translateY(0);
 		opacity: 1;
 	}
+}
+
+.submenu {
+	border-bottom: 1px solid #666;
 }
 
 /* Add these styles to your style.css file */
@@ -405,4 +420,115 @@
 .c-g-item6 {
 	background-image: url('https://www.gerstaecker.rocks/out/pictures/ddmedia/keilrahmen_1.jpg');
 	grid-area: 2 / 4 / 3 / 5;
+}
+
+@media (min-width: 1024px) and (max-width: 1095px) {
+	.custom-cols {
+		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+	}
+}
+
+/* Custom CSS for SEO section */
+.seo_h2 {
+	text-align: center;
+	color: #575757;
+	font-size: 13px;
+}
+.seo_p,
+.seo_ul {
+	color: #575757;
+	line-height: 1.6;
+	font-size: 13px;
+}
+.seo_ul {
+	list-style-type: disc;
+	padding-left: 1.5rem;
+}
+
+/* Custom CSS for footer */
+.footer-box {
+	font-size: 14px;
+}
+.footer-box-title {
+	font-weight: bold;
+	margin-bottom: 1rem;
+	text-transform: none;
+	border-bottom: 1px solid #666;
+}
+.footer-box-content a {
+	color: #575757;
+	text-decoration: none;
+}
+.footer-box-content a:hover {
+	text-decoration: underline;
+}
+
+.payment {
+	display: flex;
+	justify-content: center;
+	background-color: white;
+	text-align: center;
+	padding: 2px;
+	margin: 0 5px 5px 5px;
+	width: 65px;
+	height: 35px;
+	border: 1px solid #d1d1d1;
+	border-radius: 5px;
+	float: left;
+}
+
+.sm_icons {
+	width: 33%;
+	text-align: center;
+	float: left;
+}
+.footer_style {
+	line-height: 135%;
+}
+
+/* Custom CSS for animations */
+.footer-box-content {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.3s ease-out;
+}
+.footer-box-content.open {
+	max-height: 500px; /* Adjust based on content height */
+}
+.footer-box-title i {
+	transition: transform 0.3s ease;
+}
+.footer-box-title.open i {
+	transform: rotate(180deg);
+}
+
+/* Hide chevron icons on screens larger than 980px */
+@media (min-width: 980px) {
+	.chevron-icon {
+		display: none;
+	}
+
+	/* Ensure footer content is always visible on large screens */
+	.footer-box-content {
+		max-height: none !important; /* Override any max-height set by JS */
+		overflow: visible !important; /* Ensure content is visible */
+	}
+}
+
+/* Show chevron icons and collapse content by default on small screens */
+@media (max-width: 979.98px) {
+	.chevron-icon {
+		display: inline-block; /* Ensure the icon is visible */
+	}
+
+	/* Collapse footer content by default on small screens */
+	.footer-box-content {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease-out;
+	}
+
+	.footer-box-content.open {
+		max-height: 500px; /* Adjust based on content height */
+	}
 }

@@ -131,6 +131,10 @@ async function loadPartials() {
 		'cards.html',
 		'categories.html',
 		'sales.html',
+		'cards2.html',
+		'boutiques.html',
+		'seo',
+		'footer',
 	];
 
 	for (const file of partials) {
@@ -160,6 +164,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 		initMenuLogic();
 		initMobileMenuLogic();
 		initSwiper();
+		initFooterToggle();
 	}, 500);
 });
 
@@ -286,66 +291,6 @@ function initMenuLogic() {
 	console.log('✅ Menu logic initialized.');
 }
 
-// ✅ **Mobile Menu Toggle Logic**
-function initMobileMenuLogic() {
-	console.log('✅ Initializing mobile menu logic...');
-
-	const menuBtn = document.getElementById('menu-btn');
-	const bottomHeader = document.getElementById('bottom-header');
-	const submenu = document.querySelector('.submenu');
-	const burgerIcon = menuBtn?.querySelector('.burger');
-	const closeIcon = menuBtn?.querySelector('.closer');
-
-	if (!menuBtn || !bottomHeader || !submenu) {
-		console.warn('⚠️ Mobile menu elements not found. Skipping logic.');
-		return;
-	}
-
-	console.log('✅ Mobile menu button, bottom-header, and submenu found!');
-
-	menuBtn.addEventListener('click', (event) => {
-		event.preventDefault();
-		event.stopPropagation();
-
-		const isHidden = bottomHeader.classList.contains('hidden');
-
-		// Toggle visibility
-		bottomHeader.classList.toggle('hidden', !isHidden);
-		bottomHeader.classList.toggle('open-menu', isHidden);
-
-		submenu.classList.toggle('hidden', !isHidden);
-		submenu.classList.toggle('open-submenu', isHidden);
-
-		// Toggle icons
-		burgerIcon.classList.toggle('hidden', isHidden);
-		closeIcon.classList.toggle('hidden', !isHidden);
-
-		console.log('📢 Mobile menu toggled!', { isHidden });
-	});
-
-	// ✅ Close menu when clicking outside
-	document.addEventListener('click', (event) => {
-		if (
-			!bottomHeader.contains(event.target) &&
-			!menuBtn.contains(event.target)
-		) {
-			bottomHeader.classList.add('hidden');
-			bottomHeader.classList.remove('open-menu');
-
-			submenu.classList.add('hidden');
-			submenu.classList.remove('open-submenu');
-
-			// Reset icons
-			burgerIcon.classList.remove('hidden');
-			closeIcon.classList.add('hidden');
-
-			console.log('❌ Mobile menu & submenu closed!');
-		}
-	});
-
-	console.log('✅ Mobile menu logic initialized.');
-}
-
 // ✅ Swiper Initialization Function
 function initSwiper() {
 	console.log('✅ Initializing Swiper...');
@@ -373,4 +318,110 @@ function initSwiper() {
 	});
 
 	console.log('✅ Swiper initialized.');
+}
+
+// ✅ **Mobile Menu Toggle Logic**
+function initMobileMenuLogic() {
+	console.log('✅ Initializing mobile menu logic...');
+
+	// Cache DOM elements
+	const menuBtn = document.getElementById('menu-btn');
+	const closeMenuBtn = document.getElementById('closeMenuBtn');
+	const mobileMenu = document.getElementById('mobileMenu');
+	const menuOverlay = document.getElementById('menuOverlay');
+
+	// Check if all required elements exist
+	if (!menuBtn || !closeMenuBtn || !mobileMenu || !menuOverlay) {
+		console.warn(
+			'⚠️ Mobile menu elements not found, skipping event listeners.',
+		);
+		return; // Exit early if elements are missing
+	}
+
+	// Function to open the mobile menu
+	const openMenu = () => {
+		mobileMenu.classList.remove('-translate-x-full');
+		menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+		menuOverlay.classList.add('opacity-100', 'pointer-events-auto');
+	};
+
+	// Function to close the mobile menu
+	const closeMenu = () => {
+		mobileMenu.classList.add('-translate-x-full');
+		menuOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+		menuOverlay.classList.add('opacity-0', 'pointer-events-none');
+	};
+
+	// Event listeners
+	menuBtn.addEventListener('click', openMenu);
+	closeMenuBtn.addEventListener('click', closeMenu);
+	menuOverlay.addEventListener('click', closeMenu);
+
+	// Nested Dropdown Functionality
+	document.querySelectorAll('.hasSubCats > a').forEach((item) => {
+		item.addEventListener('click', (e) => {
+			e.preventDefault();
+			const parentLi = item.closest('li');
+			const submenu = parentLi.querySelector('.subcat');
+
+			if (submenu) {
+				submenu.classList.toggle('hidden');
+				// Toggle arrow rotation (optional)
+				const arrow = item.querySelector('.menu-arrow');
+				if (arrow) {
+					arrow.classList.toggle('rotate-90');
+				}
+			}
+		});
+	});
+
+	console.log('✅ Mobile menu logic initialized.');
+}
+
+function toggleContent(element) {
+	console.log('Element clicked:', element); // Debugging
+	if (!element) {
+		console.error('Element is undefined!');
+		return;
+	}
+
+	const content = element.nextElementSibling;
+	const icon = element.querySelector('i');
+
+	console.log('Content:', content); // Debugging
+	console.log('Icon:', icon); // Debugging
+
+	if (!content || !icon) {
+		console.error('Content or icon not found!');
+		return;
+	}
+
+	content.classList.toggle('open');
+	icon.classList.toggle('open');
+
+	// Toggle between fa-chevron-down and fa-chevron-up
+	if (icon.classList.contains('fa-chevron-down')) {
+		icon.classList.remove('fa-chevron-down');
+		icon.classList.add('fa-chevron-up');
+	} else {
+		icon.classList.remove('fa-chevron-up');
+		icon.classList.add('fa-chevron-down');
+	}
+}
+
+function initFooterToggle() {
+	console.log('✅ Initializing footer toggle...');
+
+	// Only attach event listeners on small screens
+	if (window.innerWidth < 980) {
+		document.querySelectorAll('.footer-box-title').forEach((title) => {
+			console.log('Attaching event listener to:', title); // Debugging
+			title.addEventListener('click', function () {
+				console.log('Footer title clicked:', this); // Debugging
+				toggleContent(this);
+			});
+		});
+	}
+
+	console.log('✅ Footer toggle initialized.');
 }
