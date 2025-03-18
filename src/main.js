@@ -1,152 +1,100 @@
-// import "./style.css";
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const produkteBtn = document.getElementById("showProdMenu");
-//   const prodMenu = document.getElementById("prodMenu");
-//   const menuNav = prodMenu.querySelector(".menu-nav");
-
-//   produkteBtn.addEventListener("click", function (event) {
-//     event.preventDefault();
-//     if (menuNav.classList.contains("active")) {
-//       closeAllMenus();
-//     } else {
-//       openMenu();
-//     }
-//   });
-
-//   document.querySelectorAll(".menu-nav > li.hasSubCats > a").forEach((link) => {
-//     link.addEventListener("click", function (event) {
-//       event.preventDefault();
-//       const parentLi = this.closest("li");
-//       const subcatLevel1 = parentLi.querySelector(".subcat.level-1");
-
-//       if (subcatLevel1) {
-//         closeSubcatsAtLevel(".subcat.level-1");
-//         closeSubcatsAtLevel(".subcat.level-2");
-//         subcatLevel1.classList.add("active");
-//         toggleLevel1CloseIcon(subcatLevel1, true); // Ensure it's visible
-//       }
-//     });
-//   });
-
-//   document
-//     .querySelectorAll(".subcat.level-1 > ul > li.hasSubCats > a")
-//     .forEach((link) => {
-//       link.addEventListener("click", function (event) {
-//         event.preventDefault();
-//         const parentLi = this.closest("li");
-//         const subcatLevel2 = parentLi.querySelector(".subcat.level-2");
-//         const subcatLevel1 = parentLi.closest(".subcat.level-1");
-
-//         if (subcatLevel2) {
-//           closeSubcatsAtLevel(".subcat.level-2");
-//           subcatLevel2.classList.add("active");
-//           toggleLevel1CloseIcon(subcatLevel1, false); // Hide Level-1 close icon
-//         }
-//       });
-//     });
-
-//   document.querySelectorAll(".close-icon").forEach((closeBtn) => {
-//     closeBtn.addEventListener("click", function (event) {
-//       event.stopPropagation();
-//       const parentSubcat = this.closest(".subcat");
-
-//       if (parentSubcat.classList.contains("level-2")) {
-//         closeSubcatsAtLevel(".subcat.level-2");
-//         toggleLevel1CloseIcon(parentSubcat.closest(".subcat.level-1"), true); // Show Level-1 close icon
-//       } else if (parentSubcat.classList.contains("level-1")) {
-//         closeSubcatsAtLevel(".subcat.level-1");
-//       }
-//     });
-//   });
-
-//   function openMenu() {
-//     menuNav.classList.add("active");
-//     menuNav.classList.remove("closing");
-//     document.addEventListener("click", outsideClickHandler);
-//   }
-
-//   function closeAllMenus() {
-//     closeSubcatsAtLevel(".subcat.level-2");
-//     closeSubcatsAtLevel(".subcat.level-1");
-
-//     menuNav.classList.add("closing");
-//     setTimeout(() => {
-//       menuNav.classList.remove("active", "closing");
-//     }, 300);
-
-//     document.removeEventListener("click", outsideClickHandler);
-//   }
-
-//   function closeSubcatsAtLevel(selector) {
-//     document.querySelectorAll(selector).forEach((subcat) => {
-//       subcat.classList.remove("active");
-//     });
-//   }
-
-//   function outsideClickHandler(event) {
-//     if (prodMenu.contains(event.target) || produkteBtn.contains(event.target)) {
-//       return;
-//     }
-
-//     const subcatLevel2 = document.querySelector(".subcat.level-2.active");
-//     const subcatLevel1 = document.querySelector(".subcat.level-1.active");
-
-//     if (subcatLevel2) {
-//       closeSubcatsAtLevel(".subcat.level-2");
-//       toggleLevel1CloseIcon(subcatLevel1, true); // Show Level-1 close icon when Level-2 closes
-//     } else if (subcatLevel1) {
-//       closeSubcatsAtLevel(".subcat.level-1");
-//     } else {
-//       closeAllMenus();
-//     }
-//   }
-
-//   function toggleLevel1CloseIcon(subcatLevel1, isVisible) {
-//     if (subcatLevel1) {
-//       const closeIcon = subcatLevel1.querySelector(".close-icon");
-//       if (closeIcon) {
-//         closeIcon.style.display = isVisible ? "block" : "none";
-//       }
-//     }
-//   }
-// });
-
 import './style.css';
+
+// async function loadPartials() {
+// 	const headerContainer = document.getElementById('header');
+
+// 	if (!headerContainer) {
+// 		console.error('⚠️ #header not found in DOM!');
+// 		return;
+// 	}
+
+// 	const partials = [
+// 		'header.html',
+// 		'bottomHeader.html',
+// 		'submenu.html',
+// 		'swiper.html',
+// 		'products.html',
+// 		'cards.html',
+// 		'categories.html',
+// 		'sales.html',
+// 		'cards2.html',
+// 		'boutiques.html',
+// 		'seo',
+// 		'footer',
+// 	];
+
+// 	for (const file of partials) {
+// 		try {
+// 			const response = await fetch(`/homepage/partials/${file}`);
+// 			if (!response.ok) {
+// 				console.error(`⚠️ Error loading ${file}: ${response.statusText}`);
+// 				continue;
+// 			}
+
+// 			const html = await response.text();
+// 			headerContainer.innerHTML += html; // Append HTML safely
+// 		} catch (error) {
+// 			console.error(`⚠️ Fetch error for ${file}:`, error);
+// 		}
+// 	}
+
+// 	console.log('✅ Partials loaded successfully.');
+// }
 
 async function loadPartials() {
 	const headerContainer = document.getElementById('header');
+	const contentContainer = document.getElementById('content');
 
-	if (!headerContainer) {
-		console.error('⚠️ #header not found in DOM!');
+	if (!headerContainer || !contentContainer) {
+		console.error('⚠️ #header or #content not found in DOM!');
 		return;
 	}
 
-	const partials = [
-		'header.html',
-		'bottomHeader.html',
-		'submenu.html',
-		'swiper.html',
-		'products.html',
-		'cards.html',
-		'categories.html',
-		'sales.html',
-		'cards2.html',
-		'boutiques.html',
-		'seo',
-		'footer',
+	const headerPartials = [
+		'partials/header.html',
+		'partials/bottomHeader.html',
+		'partials/submenu.html',
 	];
 
-	for (const file of partials) {
+	const contentPartials = [
+		'partials/swiper.html',
+		'partials/products.html',
+		'partials/cards.html',
+		'partials/categories.html',
+		'partials/sales.html',
+		'partials/cards2.html',
+		'partials/boutiques.html',
+		'partials/seo.html',
+		'partials/footer.html',
+	];
+
+	// Load header partials
+	for (const file of headerPartials) {
 		try {
-			const response = await fetch(`/homepage/partials/${file}`);
+			const response = await fetch(file);
 			if (!response.ok) {
 				console.error(`⚠️ Error loading ${file}: ${response.statusText}`);
 				continue;
 			}
 
 			const html = await response.text();
-			headerContainer.innerHTML += html; // Append HTML safely
+			headerContainer.insertAdjacentHTML('beforeend', html);
+		} catch (error) {
+			console.error(`⚠️ Fetch error for ${file}:`, error);
+		}
+	}
+
+	// Load content partials
+	for (const file of contentPartials) {
+		try {
+			const response = await fetch(file);
+			if (!response.ok) {
+				console.error(`⚠️ Error loading ${file}: ${response.statusText}`);
+				continue;
+			}
+
+			const html = await response.text();
+			contentContainer.insertAdjacentHTML('beforeend', html);
 		} catch (error) {
 			console.error(`⚠️ Fetch error for ${file}:`, error);
 		}
@@ -155,7 +103,6 @@ async function loadPartials() {
 	console.log('✅ Partials loaded successfully.');
 }
 
-// ✅ Ensure `DOMContentLoaded` waits for Partials to Load before running scripts
 document.addEventListener('DOMContentLoaded', async function () {
 	await loadPartials(); // Load partials before initializing the menu
 
@@ -169,127 +116,139 @@ document.addEventListener('DOMContentLoaded', async function () {
 });
 
 // ✅ Move menu logic into a separate function
-function initMenuLogic() {
-	console.log('✅ Initializing menu logic...');
+// function initMenuLogic() {
+// 	console.log('✅ Initializing menu logic...');
 
-	const produkteBtn = document.getElementById('showProdMenu');
-	const prodMenu = document.getElementById('prodMenu');
+// 	const produkteBtn = document.getElementById('showProdMenu');
+// 	const prodMenu = document.getElementById('prodMenu');
 
-	if (!produkteBtn || !prodMenu) {
-		console.warn('⚠️ Menu elements not found, skipping event listeners.');
-		return;
-	}
+// 	if (!produkteBtn || !prodMenu) {
+// 		console.warn('⚠️ Menu elements not found, skipping event listeners.');
+// 		return;
+// 	}
 
-	const menuNav = prodMenu.querySelector('.menu-nav');
+// 	const menuNav = prodMenu.querySelector('.menu-nav');
 
-	produkteBtn.addEventListener('click', function (event) {
-		event.preventDefault();
-		if (menuNav.classList.contains('active')) {
-			closeAllMenus();
-		} else {
-			openMenu();
-		}
-	});
+// 	produkteBtn.addEventListener('click', function (event) {
+// 		event.preventDefault();
+// 		if (menuNav.classList.contains('active')) {
+// 			closeAllMenus();
+// 		} else {
+// 			openMenu();
+// 		}
+// 	});
 
-	document.querySelectorAll('.menu-nav > li.hasSubCats > a').forEach((link) => {
-		link.addEventListener('click', function (event) {
-			event.preventDefault();
-			const parentLi = this.closest('li');
-			const subcatLevel1 = parentLi.querySelector('.subcat.level-1');
+// 	document.querySelectorAll('.menu-nav > li.hasSubCats > a').forEach((link) => {
+// 		link.addEventListener('click', function (event) {
+// 			event.preventDefault();
+// 			const parentLi = this.closest('li');
+// 			const subcatLevel1 = parentLi.querySelector('.subcat.level-1');
 
-			if (subcatLevel1) {
-				closeSubcatsAtLevel('.subcat.level-1');
-				closeSubcatsAtLevel('.subcat.level-2');
-				subcatLevel1.classList.add('active');
-				toggleLevel1CloseIcon(subcatLevel1, true);
-			}
-		});
-	});
+// 			if (subcatLevel1) {
+// 				closeSubcatsAtLevel('.subcat.level-1');
+// 				closeSubcatsAtLevel('.subcat.level-2');
+// 				subcatLevel1.classList.add('active');
+// 				toggleLevel1CloseIcon(subcatLevel1, true);
+// 			}
+// 		});
+// 	});
 
-	document
-		.querySelectorAll('.subcat.level-1 > ul > li.hasSubCats > a')
-		.forEach((link) => {
-			link.addEventListener('click', function (event) {
-				event.preventDefault();
-				const parentLi = this.closest('li');
-				const subcatLevel2 = parentLi.querySelector('.subcat.level-2');
-				const subcatLevel1 = parentLi.closest('.subcat.level-1');
+// 	document
+// 		.querySelectorAll('.subcat.level-1 > ul > li.hasSubCats > a')
+// 		.forEach((link) => {
+// 			link.addEventListener('click', function (event) {
+// 				event.preventDefault();
+// 				const parentLi = this.closest('li');
+// 				const subcatLevel2 = parentLi.querySelector('.subcat.level-2');
+// 				const subcatLevel1 = parentLi.closest('.subcat.level-1');
 
-				if (subcatLevel2) {
-					closeSubcatsAtLevel('.subcat.level-2');
-					subcatLevel2.classList.add('active');
-					toggleLevel1CloseIcon(subcatLevel1, false);
-				}
-			});
-		});
+// 				if (subcatLevel2) {
+// 					closeSubcatsAtLevel('.subcat.level-2');
+// 					subcatLevel2.classList.add('active');
+// 					toggleLevel1CloseIcon(subcatLevel1, false);
+// 				}
+// 			});
+// 		});
 
-	document.querySelectorAll('.close-icon').forEach((closeBtn) => {
-		closeBtn.addEventListener('click', function (event) {
-			event.stopPropagation();
-			const parentSubcat = this.closest('.subcat');
+// 	document.querySelectorAll('.close-icon').forEach((closeBtn) => {
+// 		closeBtn.addEventListener('click', function (event) {
+// 			event.stopPropagation();
+// 			const parentSubcat = this.closest('.subcat');
 
-			if (parentSubcat.classList.contains('level-2')) {
-				closeSubcatsAtLevel('.subcat.level-2');
-				toggleLevel1CloseIcon(parentSubcat.closest('.subcat.level-1'), true);
-			} else if (parentSubcat.classList.contains('level-1')) {
-				closeSubcatsAtLevel('.subcat.level-1');
-			}
-		});
-	});
+// 			if (parentSubcat.classList.contains('level-2')) {
+// 				closeSubcatsAtLevel('.subcat.level-2');
+// 				toggleLevel1CloseIcon(parentSubcat.closest('.subcat.level-1'), true);
+// 			} else if (parentSubcat.classList.contains('level-1')) {
+// 				closeSubcatsAtLevel('.subcat.level-1');
+// 			}
+// 		});
+// 	});
 
-	function openMenu() {
-		menuNav.classList.add('active');
-		menuNav.classList.remove('closing');
-		document.addEventListener('click', outsideClickHandler);
-	}
+// 	function openMenu() {
+// 		menuNav.classList.add('active');
+// 		menuNav.classList.remove('closing');
+// 		document.addEventListener('click', outsideClickHandler);
+// 	}
 
-	function closeAllMenus() {
-		closeSubcatsAtLevel('.subcat.level-2');
-		closeSubcatsAtLevel('.subcat.level-1');
+// 	function closeAllMenus() {
+// 		closeSubcatsAtLevel('.subcat.level-2');
+// 		closeSubcatsAtLevel('.subcat.level-1');
 
-		menuNav.classList.add('closing');
-		setTimeout(() => {
-			menuNav.classList.remove('active', 'closing');
-		}, 300);
+// 		// Add closing class to trigger animation
+// 		menuNav.classList.add('closing');
+// 		menuNav.classList.remove('active');
 
-		document.removeEventListener('click', outsideClickHandler);
-	}
+// 		// After animation completes, remove closing class
+// 		setTimeout(() => {
+// 			menuNav.classList.remove('closing');
+// 		}, 300); // Match transition duration
 
-	function closeSubcatsAtLevel(selector) {
-		document.querySelectorAll(selector).forEach((subcat) => {
-			subcat.classList.remove('active');
-		});
-	}
+// 		document.removeEventListener('click', outsideClickHandler);
+// 	}
 
-	function outsideClickHandler(event) {
-		if (prodMenu.contains(event.target) || produkteBtn.contains(event.target)) {
-			return;
-		}
+// 	// UPDATED: Modified to handle animations properly
+// 	function closeSubcatsAtLevel(selector) {
+// 		document.querySelectorAll(selector + '.active').forEach((subcat) => {
+// 			// Add closing class to trigger animation
+// 			subcat.classList.add('closing');
+// 			subcat.classList.remove('active');
 
-		const subcatLevel2 = document.querySelector('.subcat.level-2.active');
-		const subcatLevel1 = document.querySelector('.subcat.level-1.active');
+// 			// After animation completes, remove closing class
+// 			setTimeout(() => {
+// 				subcat.classList.remove('closing');
+// 			}, 300); // Match transition duration
+// 		});
+// 	}
 
-		if (subcatLevel2) {
-			closeSubcatsAtLevel('.subcat.level-2');
-			toggleLevel1CloseIcon(subcatLevel1, true);
-		} else if (subcatLevel1) {
-			closeSubcatsAtLevel('.subcat.level-1');
-		} else {
-			closeAllMenus();
-		}
-	}
+// 	function outsideClickHandler(event) {
+// 		if (prodMenu.contains(event.target) || produkteBtn.contains(event.target)) {
+// 			return;
+// 		}
 
-	function toggleLevel1CloseIcon(subcatLevel1, isVisible) {
-		if (subcatLevel1) {
-			const closeIcon = subcatLevel1.querySelector('.close-icon');
-			if (closeIcon) {
-				closeIcon.style.display = isVisible ? 'block' : 'none';
-			}
-		}
-	}
+// 		const subcatLevel2 = document.querySelector('.subcat.level-2.active');
+// 		const subcatLevel1 = document.querySelector('.subcat.level-1.active');
 
-	console.log('✅ Menu logic initialized.');
-}
+// 		if (subcatLevel2) {
+// 			closeSubcatsAtLevel('.subcat.level-2');
+// 			toggleLevel1CloseIcon(subcatLevel1, true);
+// 		} else if (subcatLevel1) {
+// 			closeSubcatsAtLevel('.subcat.level-1');
+// 		} else {
+// 			closeAllMenus();
+// 		}
+// 	}
+
+// 	function toggleLevel1CloseIcon(subcatLevel1, isVisible) {
+// 		if (subcatLevel1) {
+// 			const closeIcon = subcatLevel1.querySelector('.close-icon');
+// 			if (closeIcon) {
+// 				closeIcon.style.display = isVisible ? 'block' : 'none';
+// 			}
+// 		}
+// 	}
+
+// 	console.log('✅ Menu logic initialized.');
+// }
 
 // ✅ Swiper Initialization Function
 function initSwiper() {
@@ -366,11 +325,6 @@ function initMobileMenuLogic() {
 
 			if (submenu) {
 				submenu.classList.toggle('hidden');
-				// Toggle arrow rotation (optional)
-				const arrow = item.querySelector('.menu-arrow');
-				if (arrow) {
-					arrow.classList.toggle('rotate-90');
-				}
 			}
 		});
 	});
@@ -424,4 +378,285 @@ function initFooterToggle() {
 	}
 
 	console.log('✅ Footer toggle initialized.');
+}
+
+// 0000
+// function initMenuLogic() {
+// 	console.log('✅ Initializing menu logic...');
+
+// 	const produkteBtn = document.getElementById('showProdMenu');
+// 	const prodMenu = document.getElementById('prodMenu');
+// 	const contentContainer = document.getElementById('content'); // Get the content container
+
+// 	if (!produkteBtn || !prodMenu || !contentContainer) {
+// 		console.warn(
+// 			'⚠️ Menu or content elements not found, skipping event listeners.',
+// 		);
+// 		return;
+// 	}
+
+// 	const menuNav = prodMenu.querySelector('.menu-nav');
+
+// 	produkteBtn.addEventListener('click', function (event) {
+// 		event.preventDefault();
+// 		if (menuNav.classList.contains('active')) {
+// 			closeAllMenus();
+// 		} else {
+// 			openMenu();
+// 		}
+// 	});
+
+// 	document.querySelectorAll('.menu-nav > li.hasSubCats > a').forEach((link) => {
+// 		link.addEventListener('click', function (event) {
+// 			event.preventDefault();
+// 			const parentLi = this.closest('li');
+// 			const subcatLevel1 = parentLi.querySelector('.subcat.level-1');
+
+// 			if (subcatLevel1) {
+// 				closeSubcatsAtLevel('.subcat.level-1');
+// 				closeSubcatsAtLevel('.subcat.level-2');
+// 				subcatLevel1.classList.add('active');
+// 				toggleLevel1CloseIcon(subcatLevel1, true);
+// 			}
+// 		});
+// 	});
+
+// 	document
+// 		.querySelectorAll('.subcat.level-1 > ul > li.hasSubCats > a')
+// 		.forEach((link) => {
+// 			link.addEventListener('click', function (event) {
+// 				event.preventDefault();
+// 				const parentLi = this.closest('li');
+// 				const subcatLevel2 = parentLi.querySelector('.subcat.level-2');
+// 				const subcatLevel1 = parentLi.closest('.subcat.level-1');
+
+// 				if (subcatLevel2) {
+// 					closeSubcatsAtLevel('.subcat.level-2');
+// 					subcatLevel2.classList.add('active');
+// 					toggleLevel1CloseIcon(subcatLevel1, false);
+// 				}
+// 			});
+// 		});
+
+// 	document.querySelectorAll('.close-icon').forEach((closeBtn) => {
+// 		closeBtn.addEventListener('click', function (event) {
+// 			event.stopPropagation();
+// 			const parentSubcat = this.closest('.subcat');
+
+// 			if (parentSubcat.classList.contains('level-2')) {
+// 				closeSubcatsAtLevel('.subcat.level-2');
+// 				toggleLevel1CloseIcon(parentSubcat.closest('.subcat.level-1'), true);
+// 			} else if (parentSubcat.classList.contains('level-1')) {
+// 				closeSubcatsAtLevel('.subcat.level-1');
+// 			}
+// 		});
+// 	});
+
+// 	function openMenu() {
+// 		menuNav.classList.add('active');
+// 		menuNav.classList.remove('closing');
+// 		contentContainer.classList.add('blur-effect'); // Add blur effect
+// 		document.addEventListener('click', outsideClickHandler);
+// 	}
+
+// 	function closeAllMenus() {
+// 		closeSubcatsAtLevel('.subcat.level-2');
+// 		closeSubcatsAtLevel('.subcat.level-1');
+
+// 		// Add closing class to trigger animation
+// 		menuNav.classList.add('closing');
+// 		menuNav.classList.remove('active');
+// 		contentContainer.classList.remove('blur-effect'); // Remove blur effect
+
+// 		// After animation completes, remove closing class
+// 		setTimeout(() => {
+// 			menuNav.classList.remove('closing');
+// 		}, 300); // Match transition duration
+
+// 		document.removeEventListener('click', outsideClickHandler);
+// 	}
+
+// 	// UPDATED: Modified to handle animations properly
+// 	function closeSubcatsAtLevel(selector) {
+// 		document.querySelectorAll(selector + '.active').forEach((subcat) => {
+// 			// Add closing class to trigger animation
+// 			subcat.classList.add('closing');
+// 			subcat.classList.remove('active');
+
+// 			// After animation completes, remove closing class
+// 			setTimeout(() => {
+// 				subcat.classList.remove('closing');
+// 			}, 300); // Match transition duration
+// 		});
+// 	}
+
+// 	function outsideClickHandler(event) {
+// 		if (prodMenu.contains(event.target) || produkteBtn.contains(event.target)) {
+// 			return;
+// 		}
+
+// 		const subcatLevel2 = document.querySelector('.subcat.level-2.active');
+// 		const subcatLevel1 = document.querySelector('.subcat.level-1.active');
+
+// 		if (subcatLevel2) {
+// 			closeSubcatsAtLevel('.subcat.level-2');
+// 			toggleLevel1CloseIcon(subcatLevel1, true);
+// 		} else if (subcatLevel1) {
+// 			closeSubcatsAtLevel('.subcat.level-1');
+// 		} else {
+// 			closeAllMenus();
+// 		}
+// 	}
+
+// 	function toggleLevel1CloseIcon(subcatLevel1, isVisible) {
+// 		if (subcatLevel1) {
+// 			const closeIcon = subcatLevel1.querySelector('.close-icon');
+// 			if (closeIcon) {
+// 				closeIcon.style.display = isVisible ? 'block' : 'none';
+// 			}
+// 		}
+// 	}
+
+// 	console.log('✅ Menu logic initialized.');
+// }
+
+function initMenuLogic() {
+	console.log('✅ Initializing menu logic...');
+
+	const produkteBtn = document.getElementById('showProdMenu');
+	const prodMenu = document.getElementById('prodMenu');
+	const contentContainer = document.getElementById('content'); // Get the content container
+
+	if (!produkteBtn || !prodMenu || !contentContainer) {
+		console.warn(
+			'⚠️ Menu or content elements not found, skipping event listeners.',
+		);
+		return;
+	}
+
+	const menuNav = prodMenu.querySelector('.menu-nav');
+
+	produkteBtn.addEventListener('click', function (event) {
+		event.preventDefault();
+		if (menuNav.classList.contains('active')) {
+			closeAllMenus();
+		} else {
+			openMenu();
+		}
+	});
+
+	document.querySelectorAll('.menu-nav > li.hasSubCats > a').forEach((link) => {
+		link.addEventListener('click', function (event) {
+			event.preventDefault();
+			const parentLi = this.closest('li');
+			const subcatLevel1 = parentLi.querySelector('.subcat.level-1');
+
+			if (subcatLevel1) {
+				closeSubcatsAtLevel('.subcat.level-1');
+				closeSubcatsAtLevel('.subcat.level-2');
+				subcatLevel1.classList.add('active');
+				toggleLevel1CloseIcon(subcatLevel1, true);
+			}
+		});
+	});
+
+	document
+		.querySelectorAll('.subcat.level-1 > ul > li.hasSubCats > a')
+		.forEach((link) => {
+			link.addEventListener('click', function (event) {
+				event.preventDefault();
+				const parentLi = this.closest('li');
+				const subcatLevel2 = parentLi.querySelector('.subcat.level-2');
+				const subcatLevel1 = parentLi.closest('.subcat.level-1');
+
+				if (subcatLevel2) {
+					closeSubcatsAtLevel('.subcat.level-2');
+					subcatLevel2.classList.add('active');
+					toggleLevel1CloseIcon(subcatLevel1, false);
+				}
+			});
+		});
+
+	document.querySelectorAll('.close-icon').forEach((closeBtn) => {
+		closeBtn.addEventListener('click', function (event) {
+			event.stopPropagation();
+			const parentSubcat = this.closest('.subcat');
+
+			if (parentSubcat.classList.contains('level-2')) {
+				closeSubcatsAtLevel('.subcat.level-2');
+				toggleLevel1CloseIcon(parentSubcat.closest('.subcat.level-1'), true);
+			} else if (parentSubcat.classList.contains('level-1')) {
+				closeSubcatsAtLevel('.subcat.level-1');
+			}
+		});
+	});
+
+	function openMenu() {
+		menuNav.classList.add('active');
+		menuNav.classList.remove('closing');
+		produkteBtn.classList.add('active'); // Add active class to #showProdMenu
+		contentContainer.classList.add('blur-effect'); // Add blur effect
+		document.addEventListener('click', outsideClickHandler);
+	}
+
+	function closeAllMenus() {
+		closeSubcatsAtLevel('.subcat.level-2');
+		closeSubcatsAtLevel('.subcat.level-1');
+
+		// Add closing class to trigger animation
+		menuNav.classList.add('closing');
+		menuNav.classList.remove('active');
+		produkteBtn.classList.remove('active'); // Remove active class from #showProdMenu
+		contentContainer.classList.remove('blur-effect'); // Remove blur effect
+
+		// After animation completes, remove closing class
+		setTimeout(() => {
+			menuNav.classList.remove('closing');
+		}, 300); // Match transition duration
+
+		document.removeEventListener('click', outsideClickHandler);
+	}
+
+	// UPDATED: Modified to handle animations properly
+	function closeSubcatsAtLevel(selector) {
+		document.querySelectorAll(selector + '.active').forEach((subcat) => {
+			// Add closing class to trigger animation
+			subcat.classList.add('closing');
+			subcat.classList.remove('active');
+
+			// After animation completes, remove closing class
+			setTimeout(() => {
+				subcat.classList.remove('closing');
+			}, 300); // Match transition duration
+		});
+	}
+
+	function outsideClickHandler(event) {
+		if (prodMenu.contains(event.target) || produkteBtn.contains(event.target)) {
+			return;
+		}
+
+		const subcatLevel2 = document.querySelector('.subcat.level-2.active');
+		const subcatLevel1 = document.querySelector('.subcat.level-1.active');
+
+		if (subcatLevel2) {
+			closeSubcatsAtLevel('.subcat.level-2');
+			toggleLevel1CloseIcon(subcatLevel1, true);
+		} else if (subcatLevel1) {
+			closeSubcatsAtLevel('.subcat.level-1');
+		} else {
+			closeAllMenus();
+		}
+	}
+
+	function toggleLevel1CloseIcon(subcatLevel1, isVisible) {
+		if (subcatLevel1) {
+			const closeIcon = subcatLevel1.querySelector('.close-icon');
+			if (closeIcon) {
+				closeIcon.style.display = isVisible ? 'block' : 'none';
+			}
+		}
+	}
+
+	console.log('✅ Menu logic initialized.');
 }

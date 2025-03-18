@@ -1,52 +1,3 @@
-/* @import "tailwindcss";
-
-#bottom-header {
-  border-color: #999;
-}
-
-#showProdMenu:hover {
-  background-color: black;
-  color: white;
-}
-
-.menu-nav a,
-.subcat.level-1 a,
-.subcat.level-2 a {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.menu-text {
-  margin-right: 45px;
-}
-
-.menu-arrow,
-.arrows {
-  margin-left: auto;
-}
-
-.subcat {
-  display: none;
-} */
-
-/* llll */
-
-/* .menu-nav {
-  height: 0;
-  opacity: 0;
-  transition: all 0.5s ease;
-  transform: translateY(-100%);
-}
-
-.active {
-  height: 200px;
-  opacity: 1;
-  transform: translateY(0);
-} */
-
-/* *********************** */
-
 @import 'tailwindcss';
 
 @theme {
@@ -70,11 +21,16 @@
 	}
 }
 
+body {
+	font-size: 13px !important;
+}
+
 .basket-icon {
 	display: contents;
 }
 
 #bottom-header {
+	position: relative;
 	border-top: 1px solid #999;
 	border-bottom: 1px solid #999;
 }
@@ -85,6 +41,7 @@
 }
 
 #showProdMenu:hover,
+#showProdMenu.active,
 .submenuCat:hover {
 	background-color: black;
 	color: white;
@@ -103,7 +60,11 @@
 }
 
 .menu-text {
-	margin-right: 45px;
+	margin-right: 5px;
+}
+
+.menu-text-nav {
+	margin-right: 40px;
 }
 
 .menu-arrow,
@@ -112,46 +73,58 @@
 }
 
 .subcat {
-	display: none; /* Ensures subcategories are hidden initially */
-}
-
-.subcat-mob:not(.hidden) {
-	display: block; /* Show when the hidden class is removed */
+	display: none;
 }
 
 /* ✅ Smooth transition for menu-nav */
 .menu-nav {
 	opacity: 0;
 	visibility: hidden;
-	transform: translateY(-100%);
+	transform: translateY(-10px);
 	transition:
 		opacity 0.3s ease-in-out,
 		transform 0.3s ease-in-out,
-		visibility 0.3s;
+		visibility 0s linear 0.3s;
+	pointer-events: none;
+	position: absolute;
+	z-index: 1000;
+	margin-block-start: 41px;
 }
 
 .menu-nav.active {
 	opacity: 1;
 	visibility: visible;
 	transform: translateY(0);
+	transition:
+		opacity 0.3s ease-in-out,
+		transform 0.3s ease-in-out,
+		visibility 0s;
+	pointer-events: auto;
 }
 
 .menu-nav.closing {
 	opacity: 0;
-	transform: translateY(-100%);
-	visibility: hidden;
+	transform: translateY(-10px);
+	transition:
+		opacity 0.3s ease-in-out,
+		transform 0.3s ease-in-out,
+		visibility 0s linear 0.3s;
 }
 
 /* ✅ Fix Level-1 & Level-2 animation */
 .subcat.level-1,
 .subcat.level-2 {
+	position: absolute;
+	background-color: #ffffff;
+	left: 100%;
 	opacity: 0;
 	visibility: hidden;
+	display: block;
 	transform: translateX(-100%);
 	transition:
 		opacity 0.3s ease-in-out,
 		transform 0.3s ease-in-out,
-		visibility 0.3s;
+		visibility 0.3s linear 0.3s;
 }
 
 .subcat.level-1.active,
@@ -159,7 +132,50 @@
 	opacity: 1;
 	visibility: visible;
 	transform: translateX(0);
+	transition:
+		opacity 0.3s ease-in-out,
+		transform 0.3s ease-in-out,
+		visibility 0s;
+
 	display: block;
+	z-index: 10;
+	width: max-content;
+}
+
+/* Closing animation classes */
+.subcat.closing {
+	opacity: 0;
+	transform: translateX(-100%);
+	transition:
+		opacity 0.3s ease-in-out,
+		transform 0.3s ease-in-out,
+		visibility 0s linear 0.3s;
+}
+
+.subcat.level-1 > ul {
+	display: grid;
+	grid-template-rows: repeat(33, auto);
+	grid-auto-flow: column;
+	gap: 0px;
+	max-height: calc(15 * 95px);
+	width: max-content;
+}
+
+.hasSubCats {
+	padding: 10px;
+}
+
+.subcat > ul {
+	padding-left: 10px;
+	padding-right: 0 !important;
+
+	> li {
+		padding: 10px;
+	}
+}
+
+.show-all {
+	padding-left: 7px;
 }
 
 .submenuCats {
@@ -332,14 +348,6 @@
 	border-color: #ccc;
 }
 
-/* Styles for the "Beliebte Kategorien" section */
-.category-grid {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-	gap: 16px;
-}
-
 .cat-grid-item {
 	position: relative;
 	background-size: cover;
@@ -420,6 +428,14 @@
 .c-g-item6 {
 	background-image: url('https://www.gerstaecker.rocks/out/pictures/ddmedia/keilrahmen_1.jpg');
 	grid-area: 2 / 4 / 3 / 5;
+}
+
+@media (max-width: 980px) {
+	.c-g-item4,
+	.c-g-item5,
+	.c-g-item6 {
+		display: none;
+	}
 }
 
 @media (min-width: 1024px) and (max-width: 1095px) {
@@ -531,4 +547,10 @@
 	.footer-box-content.open {
 		max-height: 500px; /* Adjust based on content height */
 	}
+}
+
+/* CSS for blur effect on content container */
+.blur-effect {
+	filter: blur(25px);
+	transition: filter 0.3s ease;
 }
