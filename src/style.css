@@ -35,9 +35,8 @@ body {
 	border-bottom: 1px solid #999;
 }
 
-#showProdMenu,
 .submenuCat {
-	font-size: 13px;
+	text-transform: uppercase;
 }
 
 #showProdMenu:hover,
